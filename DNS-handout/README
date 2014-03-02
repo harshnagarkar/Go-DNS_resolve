@@ -1,16 +1,16 @@
-CS3753 (Operating Systems)
-Spring 2012
-University of Colorado Boulder
-Programming Assignment 2
+CSCI340 (Operating Systems)
+Spring 2014
+California State University, Chico
+Programming Assignment 4
 Public Code
 
-By Andy Sayler - 2012
-http://www.andysayler.com
 
-With help from:
-Junho Ahn - 2012
+By Bryan Dixon - 2014
+http://www.bryancdixon.com
 
 Adopted from previous code by
+ Andrew Sayler <www.andysalyer.com>    - 2012
+    Helped By: Junho Ahn               - 2012
  Chris Wailes <chris.wailes@gmail.com> - 2010
  Wei-Te Chen <weite.chen@colorado.edu> - 2011
  Blaise Barney - pthread-hello.c
