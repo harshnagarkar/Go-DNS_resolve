@@ -64,7 +64,7 @@ If necessary, you may impose the following limits on your program. If the user s
 * **MAX_NAME_LENGTH**: 1025 Characters, including null terminator (This is an optional upper-limit. Your program may handle longer names, but you may not limit the name length to less than 1025 characters.)
 * **MAX_IP_LENGTH**: INET6_ADDRSTRLEN (This is an optional upper-limit. Your program may handle longer IP address strings, but you may not limit the name length to less than INET6_ADDRSTRLEN characters including the null terminator.)
 
-##Error Handling
+###Error Handling
 You must handle the following errors in the following manners:
 * **Bogus Hostname**: Given a hostname that can not be resolved, your program should output a blank string for the IP address, such that the output file contains the hostname, followed by a comma, followed by a line return. You should also print a message to stderr alerting the user to the bogus hostname.
 * **Bogus Output File Path**: Given a bad output file path, your program should exit and print an appropriate error to stderr.
