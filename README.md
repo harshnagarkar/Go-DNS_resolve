@@ -20,7 +20,7 @@ Your appliction will take as input a set of name files. Names files contain one
 The requester thread pool services a set of name files, each of which contains a list of domain names. Each name that is read from each of the files is placed on a FIFO queue. If a thread tries to write to the queue but finds that it is full, it should sleep for a random period of time between 0 and 100 microseconds.
 
 ###Resolver Threads
-The second thread pool is comprised of a set of **THREAD_MAX** resolver threads. The resolver thread pool services the FIFO queue by taking a name o the queue and querying its IP address. After the name has been mapped to an IP address, the output is written to a line in the results.txt file in the following format:
+The second thread pool is comprised of a set of **THREAD_MAX** resolver threads. The resolver thread pool services the FIFO queue by taking a name of the queue and querying its IP address. After the name has been mapped to an IP address, the output is written to a line in the results.txt file in the following format:
 <pre>
 www.google.com,74.125.224.81
 </pre>
@@ -33,6 +33,7 @@ Your program must end after all the names in each file have been serviced by th
 
 ##What's Included
 Some files are included with this assignment for your benefit. You are not required to use these files, but they may prove helpful.
+
 1. **queue.h** and **queue.c** These two files implement the FIFO queue data structure. The queue accepts pointers to arbitrary types. You should probably use the queue to store pointers to C-strings of hostnames. The requester threads should push these hostnames into the queue, and the resolver threads should obtain hostnames from the same queue.
 	* Please consult the *queue.h* header file for more detailed descriptions of each available function.
 2. **queueTest.c** This program runs a series of tests to conrm that the queue is working correctly. You may use it as an example of how to use the queue, or to test the functionality of the queue code that you are provided.
