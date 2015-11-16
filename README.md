@@ -117,7 +117,7 @@ sudo apt-get install valgrind
 </pre>
 And to use *valgrind* to monitor your program, use this command:
 <pre>
-valgrind ./pa2main text1.txt text2.txt ...... textN.txt results.txt
+valgrind ./multi-lookup text1.txt text2.txt ...... textN.txt results.txt
 </pre>
 Valgrind should report that you have freed all allocated memory and should not produce any additional warnings or errors.
 You can write your code in any environment you like. But you have to make sure that your programs can be compiled and executed on Ubuntu 14.04.
