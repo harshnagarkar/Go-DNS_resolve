@@ -129,17 +129,17 @@ The Internet is also a good resource for finding information related to solving
 You may wish to consult the man pages for the following items, as they will be useful and/or required to complete this assignment. Note that the first argument to the "man" command is the chapter, insuring that you access the appropriate version of each man page. See example *man man* for more information.
 
 * man 7 pthreads
-* man 3 pthread_create()
-* man 3 pthread_join()
-* man 3 pthread_mutex_init()
-* man 3 pthread_mutex_destroy()
-* man 3 pthread_mutex_lock()
-* man 3 pthread_mutex_unlock()
-* man 3 fopen()
-* man 3 fclose()
-* man 3 fprintf()
-* man 3 fscanf()
-* man 3 usleep()
-* man 3 random()
-* man 3 perror()
+* man 3 pthread_create
+* man 3 pthread_join
+* man 3 pthread_mutex_init
+* man 3 pthread_mutex_destroy
+* man 3 pthread_mutex_lock
+* man 3 pthread_mutex_unlock
+* man 3 fopen
+* man 3 fclose
+* man 3 fprintf
+* man 3 fscanf
+* man 3 usleep
+* man 3 random
+* man 3 perror
 * man 1 valgrind
