@@ -120,7 +120,7 @@ And to use *valgrind* to monitor your program, use this command:
 valgrind ./multi-lookup text1.txt text2.txt ...... textN.txt results.txt
 ```
 Valgrind should report that you have freed all allocated memory and should not produce any additional warnings or errors.
-You can write your code in any environment you like. But you have to make sure that your programs can be compiled and executed on Ubuntu 14.04.
+You can write your code in any environment you like. But you have to make sure that your programs can be compiled and executed on Ubuntu 16.04.
 
 ##References
 Refer to your textbook and class notes for descriptions of producer/consumer and reader/writer problems and the different strategies used to solve them.
