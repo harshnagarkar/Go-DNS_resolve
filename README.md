@@ -102,6 +102,7 @@ You may find it necessary to modify code in the util.h and util.c files to add t
 * **Full-Loop Lookups**: Make each requester thread query the output file every 250ms to detect when each of its requests have been filled. Requester threads should print a message to the user with the IP address of each hostname, and should not exit until all of each threads requests have been satised.
 * **Benchmarks**: Determine the ideal number of resolver threads for a given processor core count. Provide benchmark data backing up your determination. Include this documentation in your README.
 * **Conditional Variables**: Implement your synchronization protections using conditional variables. This may require you to change the compilation to C11 so make sure you update the Makefile and include in your tar package of files if you choose this option. You have to submit the original project working with mutexes or semaphores to get credit for this or any of the extra credit.
+* **Conditional Variables in C11 or newer**: Implement your synchronization protections using conditional variables. This may require you to change the compilation to C11 so make sure you update the Makefile and include in your tar package of files if you choose this option. You have to submit the original project working with mutexes or semaphores to get credit for this or any of the extra credit.
 
 ## Grading
 To received full credit your program must:
