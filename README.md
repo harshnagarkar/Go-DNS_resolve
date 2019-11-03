@@ -90,7 +90,7 @@ To receive full credit, you must submit the following items to Turnin by the due
 * **multi-lookup.h**: A header file containing prototypes for any function you write as part of your program.
 
 ## Extra Credit
-There are a few options for receiving extra credit on this assignment. Completion of each of the following items will gain you 5 points of extra credit per item. In no case will the maximum score on this assignment exceed 110/100. If you alter any files other than *multi-lookup.c* and *multi-lookup.h* to accomplish the extra credit make sure you submit them as part of your assignment by taring up your whole project directory as a tar.gz file and submit to the extra credit option on Turnin. Make sure you turn in your original function project prior to attempting any of the extra credit.
+There are a few options for receiving extra credit on this assignment. Completion of each of the following items will gain you 5 points of extra credit per item. If you alter any files other than *multi-lookup.c* and *multi-lookup.h* to accomplish the extra credit make sure you submit them as part of your assignment by taring up your whole project directory as a tar.gz file and submit to the extra credit option on Turnin. Make sure you turn in your original function project prior to attempting any of the extra credit.
 
 * **Multiple IP Addresses**: Many hostnames return more than a single IP address. Add support for listing an arbitrary number of addresses to your program. These addresses should be printed to the output file as additional comma-separated strings after the hostname. For example:
 ```
@@ -103,7 +103,9 @@ You may find it necessary to modify code in the util.h and util.c files to add t
 * **Benchmarks**: Determine the ideal number of resolver threads for a given processor core count. Provide benchmark data backing up your determination. Include this documentation in your README.
 * **Conditional Variables**: Implement your synchronization protections using POSIX conditional variables. You have to submit the original project working with mutexes or semaphores to get credit for this or any of the extra credit.
 * **Conditional Variables in C11 or newer**: Implement your synchronization protections using C11 or newer conditional variables. This will require you to change the compilation to C11 or a newer C compiler so make sure you update the Makefile and include in your tar package of files if you choose this option. You have to submit the original project working with mutexes or semaphores to get credit for this or any of the extra credit.
-* **Go:** Implement the assignment in go using go's thrread-safe channels and threads, minimum resolver/requester threads are the same.
+* **Go:** Implement the assignment in go using go's thread-safe channels and threads, minimum resolver/requester threads are the same.
+* **Rust:** Implement the assignment in go using Rust in a threaded/thread-safe manner. 
+
 
 ## Grading
 To received full credit your program must:
@@ -122,7 +124,7 @@ And to use *valgrind* to monitor your program, use this command:
 valgrind ./multi-lookup text1.txt text2.txt ...... textN.txt results.txt
 ```
 Valgrind should report that you have freed all allocated memory and should not produce any additional warnings or errors.
-You can write your code in any environment you like. But you have to make sure that your programs can be compiled and executed on Ubuntu 16.04.
+You can write your code in any environment you like. But you have to make sure that your programs can be compiled and executed on Ubuntu 18.04.
 
 ## References
 Refer to your textbook and class notes for descriptions of producer/consumer and reader/writer problems and the different strategies used to solve them.
