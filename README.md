@@ -92,6 +92,8 @@ To receive full credit, you must submit the following items to Turnin by the due
 ## Extra Credit
 There are a few options for receiving extra credit on this assignment. Completion of each of the following items will gain you 5 points of extra credit per item. If you alter any files other than *multi-lookup.c* and *multi-lookup.h* to accomplish the extra credit make sure you submit them as part of your assignment by taring up your whole project directory as a tar.gz file and submit to the extra credit option on Turnin. Make sure you turn in your original function project prior to attempting any of the extra credit.
 
+You should submit all the code in one file with a readme.md that lists off which extra credit you solved in the tar.gz or alternatively you should have one folder for each extra credit with the folder name representing the extra credit solved.
+
 * **Multiple IP Addresses**: Many hostnames return more than a single IP address. Add support for listing an arbitrary number of addresses to your program. These addresses should be printed to the output file as additional comma-separated strings after the hostname. For example:
 ```
 www.google.com,74.125.224.81,76.125.232.80,75.125.211.70
