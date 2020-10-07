@@ -1,4 +1,4 @@
-CSCI640-DNS-Name-Resolution-Engine
+CSCI640-DNS-Name-Resolution-Engine-Go
 ==================================
 ## CSCI640 - Operating Systems
 Adapted from University of Colorado at Boulder CSCI3753 Assignment
