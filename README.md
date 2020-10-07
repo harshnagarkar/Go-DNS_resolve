@@ -1,6 +1,6 @@
-CSCI340-DNS-Name-Resolution-Engine
+CSCI640-DNS-Name-Resolution-Engine
 ==================================
-## CSCI340 - Operating Systems
+## CSCI640 - Operating Systems
 Adapted from University of Colorado at Boulder CSCI3753 Assignment
 
 ## Introduction
@@ -17,16 +17,16 @@ Figure 1: System Architecture
 Your application will take as input a set of name files. Names files contain one hostname per line. Each name file should be serviced by a single requester thread from the requester thread pool.
 
 ### Requester Threads
-The requester thread pool services a set of name files, each of which contains a list of domain names. Each name that is read from each of the files is placed on a FIFO queue. If a thread tries to write to the queue but finds that it is full, it should sleep for a random period of time between 0 and 100 microseconds.
+The requester thread pool services a set of name files, each of which contains a list of domain names. Each name that is read from each of the files and shared either through a bounded buffer or channels. 
 
 ### Resolver Threads
-The second thread pool is comprised of a set of **THREAD_MAX** resolver threads. The resolver thread pool services the FIFO queue by taking a name of the queue and querying its IP address. After the name has been mapped to an IP address, the output is written to a line in the `results.txt` file in the following format:
+The second thread pool is comprised of a set of **THREAD_MAX** resolver threads. The resolver thread pool takes a name from either the bounded buffer or channel mechanism and querying its IP address. After the name has been mapped to an IP address, the output is written to a line in the `results.txt` file in the following format:
 ```
 www.google.com,74.125.224.81
 ```
 
 ### Synchronization and Deadlock
-Your application should synchronize access to shared resources and avoid deadlock. You should use mutexes and/or semaphores to meet this requirement. There are at least two shared resources that must be protected: the queue and the output file. Neither of these resources is thread-safe by default.
+Your application should synchronize access to shared resources and avoid deadlock. You should use mutexes and channels to meet this requirement. There are at least two shared resources that must be protected: bounded buffer or channel, and the output file. Only the channels are thread-safe by default.
 
 ### Ending the Program
 Your program must end after all the names in each file have been serviced by the application. This means that all the hostnames in all the input files have received a corresponding line in the output file.
@@ -34,16 +34,10 @@ Your program must end after all the names in each file have been serviced by the
 ## What's Included
 Some files are included with this assignment for your benefit. You are not required to use these files, but they may prove helpful.
 
-1. **queue.h** and **queue.c** These two files implement the FIFO queue data structure. The queue accepts pointers to arbitrary types. You should probably use the queue to store pointers to C-strings of hostnames. The requester threads should push these hostnames into the queue, and the resolver threads should obtain hostnames from the same queue.
-	* Please consult the *queue.h* header file for more detailed descriptions of each available function.
-2. **queueTest.c** This program runs a series of tests to confirm that the queue is working correctly. You may use it as an example of how to use the queue, or to test the functionality of the queue code that you are provided.
-3. **util.c** and **util.h** These two files contain the DNS lookup utility function. This function abstracts away a lot of the complexity involved with performing a DNS lookup. The function accepts a hostname as input and generates a corresponding dot-formatted IPv4 IP address string as output.
-	* Please consult the *util.h* header file for more detailed descriptions of each available function.
-4. **input/names*.txt** This is a set of sample name files. They follow the same format as mentioned earlier. Use them to test your program.
-5. **results-ref.txt** This result file is a sample output of the IPs for the hostnames from all the **names*.txt** files used as input.
-6. **lookup.c** This program represents an un-threaded solution to this assignment. Feel free to use it as a starting point for your program, or as a reference for using the utility functions and performing file i/o in C.
-7. **pthread-hello.c** A simple threaded "Hello World" program to demonstrate basic use of the `pthread` library.
-8. **Makefile** A GNU Make makefile to build all the code.
+1. **input/names*.txt** This is a set of sample name files. They follow the same format as mentioned earlier. Use them to test your program.
+2. **results-ref.txt** This result file is a sample output of the IPs for the hostnames from all the **names*.txt** files used as input.
+3. **lookup.go** This program represents an un-threaded solution to this assignment. Feel free to use it as a starting point for your program, or as a reference for using the utility functions and performing file i/o in Go.
+
 
 ## Additional Specifications
 Many of the specifications for your program are embedded in the descriptions above. This section details additional specifications to which you must adhere.
@@ -53,7 +47,7 @@ Your executable program should be named "multi-lookup". When called, it should i
 
 An example call involving three input files might look like:
 ```
-multi-lookup names1.txt names2.txt names3.txt result.txt
+go run multi-lookup.go input/names1.txt input/names2.txt input/names3.txt input/names4.txt input/names5.txt results.txt 
 ```
 
 ### Limits
@@ -74,23 +68,22 @@ All system and library calls should be checked for errors. If you encounter erro
 
 ## External Resources
 You may use the following libraries and code to complete this assignment, as well as anything you have written for this assignment:
-* Any functions listed in util.h
-* Any functions listed in queue.h
-* Any functions in the C Standard Library
-* Standard Linux pthread functions
-* Standard Linux Random Number Generator functions
-* Standard Linux le i/o functions
+* bufio
+* fmt
+* log
+* net
+* os
+* sync
 
 If you would like to use additional external libraries, you must clear it with me first. You will not be allowed to use pre-existing thread-safe queue or file i/o libraries since the point of this assignment is to teach you how to make non-thread-safe resources thread-safe.
 
 ## What You Must Provide
 To receive full credit, you must submit the following items to Turnin by the due date.
 
-* **multi-lookup.c**: Your program, conforming to the above requirements
-* **multi-lookup.h**: A header file containing prototypes for any function you write as part of your program.
+* **multi-lookup.go**: Your program, conforming to the above requirements
 
 ## Extra Credit
-There are a few options for receiving extra credit on this assignment. Completion of each of the following items will gain you 5 points of extra credit per item. If you alter any files other than *multi-lookup.c* and *multi-lookup.h* to accomplish the extra credit make sure you submit them as part of your assignment by taring up your whole project directory as a tar.gz file and submit to the extra credit option on Turnin. Make sure you turn in your original function project prior to attempting any of the extra credit.
+There are a few options for receiving extra credit on this assignment. Completion of each of the following items will gain you 5 points of extra credit per item. If you alter any files other than *multi-lookup.go* to accomplish the extra credit make sure you submit them as part of your assignment by taring up your whole project directory as a tar.gz file and submit to the extra credit option on Turnin. Make sure you turn in your original function project prior to attempting any of the extra credit.
 
 You should submit all the code in one file with a readme.md that lists off which extra credit you solved in the tar.gz or alternatively you should have one folder for each extra credit with the folder name representing the extra credit solved.
 
@@ -98,54 +91,21 @@ You should submit all the code in one file with a readme.md that lists off which
 ```
 www.google.com,74.125.224.81,76.125.232.80,75.125.211.70
 ```
-You may find it necessary to modify code in the util.h and util.c files to add this functionality. If you do this, please maintain backwards compatibility with the existing util.h functions. This is most easily done by adding new function instead of modifying the existing ones.
-* **IPv6 Support and Testing**: Add support for IPv6 IP addresses and find an IPv6 aware environment where you can test this support. Since IPv6 is relatively new, finding an environment for testing this support is probably harder than adding it. You must be able to demonstrate IPv6 support during office hours to receive credit for this item. You may find it necessary to modify code in util.h and util.c to complete this item. If you do so, please maintain backward compatibility with the existing code.
+
+* **IPv6 Support and Testing**: Add support for IPv6 IP addresses and find an IPv6 aware environment where you can test this support. Since IPv6 is relatively new, finding an environment for testing this support is probably harder than adding it. 
 * **Matching Number of Threads to Number of Cores**: Make your program dynamically detect the number of cores available on a system and set the number of resolver threads to take into account the number of cores. I would recommend starting with this in trying to get extra credit on this assignment.
-* **Full-Loop Lookups**: Make each requester thread query the output file every 250ms to detect when each of its requests have been filled. Requester threads should print a message to the user with the IP address of each hostname, and should not exit until all of each threads requests have been satised.
-* **Benchmarks**: Determine the ideal number of resolver threads for a given processor core count. Provide benchmark data backing up your determination. Include this documentation in your README.
-* **Conditional Variables**: Implement your synchronization protections using POSIX conditional variables. You have to submit the original project working with mutexes or semaphores to get credit for this or any of the extra credit.
-* **Conditional Variables in C11/C++11 or newer**: Implement your synchronization protections using C11 or newer conditional variables. This will require you to change the compilation to C11 or a newer C compiler so make sure you update the Makefile and include in your tar package of files if you choose this option. You have to submit the original project working with mutexes or semaphores to get credit for this or any of the extra credit.
-* **Go:** Implement the assignment in go using go's thread-safe channels and threads, minimum resolver/requester threads are the same.
-* **Rust:** Implement the assignment in go using Rust in a threaded/thread-safe manner. 
 
 
 ## Grading
 To received full credit your program must:
 * Meet all requirements elicited in this document
-* Build with "-Wall" and "-Wextra" enabled, producing no errors or warnings.
-* Run without leaking any memory, as measured using valgrind
 * Document any resources you use to solve your assignment in the header comment of your file
 * Include your name in the header comment of your file
 
-This includes adhering to good coding style practices. To verify that you do not leak memory, I may use *valgrind* to test your program. To install *valgrind*, use the following command:
-```
-sudo apt-get install valgrind
-```
-And to use *valgrind* to monitor your program, use this command:
-```
-valgrind ./multi-lookup text1.txt text2.txt ...... textN.txt results.txt
-```
-Valgrind should report that you have freed all allocated memory and should not produce any additional warnings or errors.
+This includes adhering to good coding style practices. 
+
 You can write your code in any environment you like. But you have to make sure that your programs can be compiled and executed on Ubuntu 18.04.
 
 ## References
 Refer to your textbook and class notes for descriptions of producer/consumer and reader/writer problems and the different strategies used to solve them.
 The Internet is also a good resource for finding information related to solving this assignment.
-
-You may wish to consult the man pages for the following items, as they will be useful and/or required to complete this assignment. Note that the first argument to the "man" command is the chapter, insuring that you access the appropriate version of each man page. See example *man man* for more information.
-
-* man 7 pthreads
-* man 3 pthread_create
-* man 3 pthread_join
-* man 3 pthread_mutex_init
-* man 3 pthread_mutex_destroy
-* man 3 pthread_mutex_lock
-* man 3 pthread_mutex_unlock
-* man 3 fopen
-* man 3 fclose
-* man 3 fprintf
-* man 3 fscanf
-* man 3 usleep
-* man 3 random
-* man 3 perror
-* man 1 valgrind
