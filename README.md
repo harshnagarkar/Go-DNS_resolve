@@ -45,7 +45,7 @@ Many of the specifications for your program are embedded in the descriptions abo
 ### Program Arguments
 Your executable program should be named "multi-lookup". When called, it should interpret the last argument as the file path for the file to which results will be written. All proceeding arguments should be interpreted as input files containing hostnames in the aforementioned format.
 
-An example call involving three input files might look like:
+An example call involving five input files might look like:
 ```
 go run multi-lookup.go input/names1.txt input/names2.txt input/names3.txt input/names4.txt input/names5.txt results.txt 
 ```
