@@ -19,7 +19,7 @@ func main() {
 	outfile := argsWithoutProg[end]
 
 	// For write access and to create the file if it doesn't exist
-	of, err := os.Create(outfile) 
+	of, err := os.Create(outfile)
 	if err != nil {
 		fmt.Println(err)
 		return
@@ -31,17 +31,18 @@ func main() {
 			log.Fatal(err)
 			return
 		}
-		defer if.Close()
+		defer infile.Close()
 		scanner := bufio.NewScanner(infile)
 		for scanner.Scan() {
+			var hostname = scanner.Text()
 			ips, err := net.LookupIP(scanner.Text())
 			if err != nil {
-				fmt.Fprintf(os.Stderr, "dnslookup error: %s\n", scanner.Text())
+				fmt.Fprintf(os.Stderr, "dnslookup error: %s\n", hostname)
 			}
 			if len(ips) > 0 {
-				fmt.Fprintf(of, "%s %s\n", scanner.Text(), ips[0].String())
+				fmt.Fprintf(of, "%s %s\n", hostname, ips[0].String())
 			} else {
-				fmt.Fprintf(of, "%s \n", scanner.Text())
+				fmt.Fprintf(of, "%s \n", hostname)
 			}
 		}
 	}
