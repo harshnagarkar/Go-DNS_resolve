@@ -9,7 +9,7 @@ queue.
 
 This type of system architecture is referred to as a Producer-Consumer architecture. It is also used in search engine systems, like Google. In these systems, a set of crawler threads place URLs onto a queue. This queue is then serviced by a set of indexer threads which connect to the websites, parse the content, and then add an entry to a search index. Refer to Figure 1 for a visual description.
 
-![Figure 1](https://raw.githubusercontent.com/CSUChico-CSCI340/CSCI340-DNS-Name-Resolution-Engine/master/handout/pa2_2.png "System Architecture: Basic Idea of Implementation")
+![Figure 1](https://github.com/CSUChico-CSCI640/CSCI640-DNS-Name-Resolution-Engine-Go/raw/master/handout/pa2.png "System Architecture: Basic Idea of Implementation")
 Figure 1: System Architecture
 
 ## Description
