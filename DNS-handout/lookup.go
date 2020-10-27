@@ -35,6 +35,7 @@ func main() {
 		scanner := bufio.NewScanner(infile)
 		for scanner.Scan() {
 			var hostname = scanner.Text()
+			fmt.Println(hostname)
 			ips, err := net.LookupIP(hostname)
 			if err != nil {
 				fmt.Fprintf(os.Stderr, "dnslookup error: %s\n", hostname)
@@ -45,5 +46,6 @@ func main() {
 				fmt.Fprintf(of, "%s \n", hostname)
 			}
 		}
+
 	}
 }

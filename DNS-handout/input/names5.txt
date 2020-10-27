@@ -1,20 +1,82 @@
-paipai.com
-alipay.com
-softonic.com
-nifty.com
-imageshack.us
-cnn.com
-tianya.cn
-mywebsearch.com
-zynga.com
-partypoker.com
-hp.com
-walmart.com
-kugou.com
-ebay.de
-youdao.com
-hotfile.com
-qiyi.com
-pconline.com.cn
-odnoklassniki.ru
-jp.msn.com
+facebook.com 31.13.70.36
+youtube.com 172.217.164.110
+yahoo.com 74.6.143.26
+live.com 204.79.197.212
+wikipedia.org 198.35.26.96
+msn.com 13.82.28.61
+baidu.com 39.156.69.79
+blogspot.com 172.217.164.105
+microsoft.com 104.215.148.63
+qq.com 58.247.214.47
+taobao.com 140.205.94.189
+bing.com 13.107.21.200
+sina.com.cn 123.126.55.41
+soso.com 118.191.216.42
+163.com 123.58.180.8
+ask.com 151.101.42.114
+adobe.com 193.104.215.58
+twitter.com 104.244.42.193
+mozilla.com 63.245.208.194
+youku.com 106.11.43.107
+sdjjdsaf.com 
+andysayler.com 159.89.253.85
+wmfo.org 23.92.21.128
+amazon.com 205.251.242.103
+wordpress.com 192.0.78.9
+tudou.com 106.11.43.71
+yahoo.co.jp 182.22.59.229
+sohu.com 211.159.191.18
+apple.com 17.253.144.10
+hao123.com 39.156.68.154
+windows.com 104.215.148.63
+ebay.com 66.135.196.249
+pps.tv 116.211.199.235
+xunlei.com 121.41.61.107
+56.com 183.232.65.145
+fc2.com 34.218.200.224
+paypal.com 64.4.250.37
+sogou.com 118.191.216.42
+tmall.com 140.205.94.193
+ku6.com 117.50.1.222
+rakuten.co.jp 133.237.16.234
+about.com 151.101.66.137
+orkut.com.br 132.148.40.250
+ifeng.com 123.103.122.24
+goo.ne.jp 114.179.184.93
+bbc.co.uk 151.101.0.81
+yandex.ru 5.255.255.5
+myspace.com 63.135.90.70
+mail.ru 217.69.139.202
+cnet.com 35.190.79.82
+go.com 23.236.60.174
+4399.com 129.211.129.109
+orkut.com 216.239.36.21
+skype.com 40.121.80.200
+ameblo.jp 151.101.1.83
+naver.com 210.89.160.88
+flickr.com 13.227.78.140
+4shared.com 204.155.146.95
+amazon.co.jp 52.119.161.5
+linkedin.com 108.174.10.10
+dailymotion.com 195.8.215.136
+imdb.com 52.94.228.167
+aol.com 124.108.115.100
+hotmail.com 204.79.197.212
+360.cn 36.110.213.10
+craigslist.org 208.82.237.129
+weather.com 23.11.24.35
+soku.com 106.11.47.19
+alibaba.com 205.204.101.142
+renren.com 120.133.2.243
+livedoor.jp 203.104.153.16
+blogger.com 216.58.194.201
+vkontakte.ru 87.240.190.78
+answers.com 151.101.192.203
+rapidshare.com 0.0.0.0
+daum.net 203.133.167.16
+7k7k.com 157.185.156.194
+2345.com 58.211.78.133
+photobucket.com 54.192.206.8
+mediafire.com 104.16.203.237
+ehow.com 104.86.29.199
+seesaa.net 59.106.28.142
