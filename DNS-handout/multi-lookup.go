@@ -5,12 +5,12 @@ import (
 	"fmt"
 	"log"
 	"net"
-	"sync"
 	"os"
+	"sync"
 )
 
-func request(name string,ch chan string ){
-	
+func request(name string, ch chan string) {
+
 	fmt.Println("test2")
 	infile, err := os.Open(name) // For read access.
 	if err != nil {
@@ -18,52 +18,52 @@ func request(name string,ch chan string ){
 		return
 	}
 	defer infile.Close()
-		scanner := bufio.NewScanner(infile)
-		for scanner.Scan() {
-			var hostname = scanner.Text()
-			// resolve(filename)
-			fmt.Println(hostname)
-			ch<-hostname
-		}
+	scanner := bufio.NewScanner(infile)
+	for scanner.Scan() {
+		var hostname = scanner.Text()
+		// resolve(filename)
+		fmt.Println(hostname)
+		ch <- hostname
 	}
-	
-	func resolve(filename string, ch chan string){
-		// // fmt.Println("Results: "+filename)
+}
+
+func resolve(filename string, ch chan string) {
+	// // fmt.Println("Results: "+filename)
+
+	// defer of.Close()
+
+	for {
+		// if(len(ch)>0){
+		// fmt.Println("hello")
+
+		var hostname = <-ch
+		// hostname<-ch
+		ips, err := net.LookupIP(hostname)
+
+		if err != nil {
+			fmt.Fprintf(os.Stderr, "dnslookup error: %s\n", hostname)
+		}
+
 		of, err := os.Open(filename) // For read access.
 		if err != nil {
 			log.Fatal(err)
 			return
 		}
-		// defer of.Close()
-		
-		for {
-			// if(len(ch)>0){
-			// fmt.Println("hello")
 
-			var hostname = <-ch
-			// hostname<-ch
-			fmt.Println(hostname+" resolve")
-			ips, err := net.LookupIP(hostname)
-
-				if err != nil {
-					fmt.Fprintf(os.Stderr, "dnslookup error: %s\n", hostname)
-				}
-
-				if len(ips) > 0 {
-					//pass to the channel
-					fmt.Fprintf(of, "%s %s\n", hostname, ips[0].String())
-					} else {
-						fmt.Fprintf(of, "%s \n", hostname)
-						//pass to the channel
-					}
-			of.Close()
-				// }
+		if len(ips) > 0 {
+			fmt.Println(hostname + " resolve: " + ips[0].String())
+			//pass to the channel
+			fmt.Fprintf(of, "%s %s\n", hostname, ips[0].String())
+		} else {
+			fmt.Fprintf(of, "%s \n", hostname)
+			//pass to the channel
+		}
+		of.Close()
 		// }
 	}
-	
-	
-	
-	func main() {
+}
+
+func main() {
 	ch := make(chan string)
 	//Get the args without the executable
 	argsWithoutProg := os.Args[1:]
@@ -86,12 +86,11 @@ func request(name string,ch chan string ){
 	var wg sync.WaitGroup
 	wg.Add(2)
 	fmt.Println("test")
-	go request("input/names1.txt",ch)
-	go resolve(outfile,ch)
+	go request("input/names1.txt", ch)
+	go resolve(outfile, ch)
 	wg.Wait()
 	// for _, s := range inputs {
 	// 	ch <- s
 	// }
-
 
 }
