@@ -14,17 +14,18 @@ type safe_channel struct {
 	mu      sync.Mutex
 	of_file *os.File
 	ch      chan string
+	wg      *sync.WaitGroup
 }
 
 func request(name string, ch chan string, wg *sync.WaitGroup) {
 
-	fmt.Println("test2")
 	infile, err := os.Open(name) // For read access.
 	if err != nil {
 		log.Fatal(err)
 		return
 	}
 	defer infile.Close()
+	defer wg.Done()
 	scanner := bufio.NewScanner(infile)
 
 	for scanner.Scan() {
@@ -34,7 +35,6 @@ func request(name string, ch chan string, wg *sync.WaitGroup) {
 
 		ch <- hostname
 	}
-	wg.Done()
 }
 
 func resolve(c *safe_channel) {
@@ -42,11 +42,12 @@ func resolve(c *safe_channel) {
 
 	// defer of.Close()
 
-	for {
+	defer c.wg.Done()
+	for i := range c.ch {
 		// if(len(ch)>0){
 		// fmt.Println("hello")
 
-		var hostname = <-c.ch
+		var hostname = i
 		// hostname<-ch
 		ips, err := net.LookupIP(hostname)
 
@@ -70,7 +71,7 @@ func resolve(c *safe_channel) {
 			data := hostname
 			// data+=hostname
 			for i := 0; i < len(ips); i++ {
-				data = data + " " + ips[i].String()
+				data = data + "," + ips[i].String()
 			}
 			data += "\n"
 			// fmt.Fprintf(c.of_file, "%s %s\n", hostname, ips[0].String())
@@ -80,8 +81,7 @@ func resolve(c *safe_channel) {
 			//pass to the channel
 		}
 		c.mu.Unlock()
-		// of.Close()
-		// }
+
 	}
 }
 
@@ -105,22 +105,27 @@ func main() {
 	}
 	// of.Close()
 
-	var wg sync.WaitGroup
-	safe_ch := safe_channel{of_file: of, ch: ch}
+	var wg1 sync.WaitGroup
+	var wg2 sync.WaitGroup
+	safe_ch := safe_channel{of_file: of, ch: ch, wg: &wg2}
 
 	fmt.Println("test")
 
-	wg.Add(len(inputs) + 1)
+	wg1.Add(len(inputs))
 	for _, s := range inputs {
 		// ch <- s
 		fmt.Println(s)
-		go request(s, ch, &wg)
+		go request(s, ch, &wg1)
 	}
 	fmt.Printf("The number of cpu are %d", runtime.NumCPU())
-	wg.Add(runtime.NumCPU())
+
+	wg2.Add(runtime.NumCPU())
 	for i := 0; i < runtime.NumCPU(); i++ {
 		go resolve(&safe_ch)
 	}
-	wg.Wait()
+
+	wg1.Wait()
+
+	close(ch)
 
 }
