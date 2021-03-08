@@ -125,7 +125,7 @@ func main() {
 	}
 
 	wg1.Wait()
-
+	wg2.Wait()
 	close(ch)
 
 }
